@@ -145,19 +145,19 @@ class Predator(Animals):
         
         self.color = white
         self.image.fill(self.color)
-        self.zoneVisionC = pygame.Rect(self.rect.x-10, self.rect.y-10, width+20, height+20)
+        self.zoneVisionP = pygame.Rect(self.rect.x-10, self.rect.y-10, width+20, height+20)
     #-----------------------------Getters/setters
     def set_x(self, value):
-        self.zoneVisionC.x = value
+        self.zoneVisionP.x = value
 
     def set_y(self, value):
-        self.zoneVisionC.y = value
+        self.zoneVisionP.y = value
 
     def get_x(self):
-        return self.zoneVisionC.x
+        return self.zoneVisionP.x
 
     def get_y(self):
-        return self.zoneVisionC.y
+        return self.zoneVisionP.y
  #here is an update on the state of the animal and to add a random movement in any direction
     def update(self):
         if self.hp > 0:
@@ -193,9 +193,9 @@ class Predator(Animals):
                 self.move[1] = random.randint(directions[self.direction][1][0],directions[self.direction][1][1])  #change relative x to a random number between min x and max x
             if self.move[0] != None: #add the relative coordinates to the cells coordinates
                 self.rect.x += self.move[0]
-                self.zoneVisionC.x += self.move[0]
+                self.zoneVisionP.x += self.move[0]
                 self.rect.y += self.move[1]
-                self.zoneVisionC.y += self.move[1] 
+                self.zoneVisionP.y += self.move[1] 
 
         elif self.hp <= 0 and self.isMiams == False:
             self.hp = 0
@@ -206,8 +206,7 @@ class Herbivore(Animals):
     def __init__(self, width, height, pos_x, pos_y):
         Animals.__init__(self, width, height, pos_x, pos_y)
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([width, height]).convert_alpha()
-        
+        self.image = pygame.Surface([width, height]).convert_alpha()       
         self.color = dark_green
         self.image.fill(self.color)
         self.zoneVisionH = pygame.Rect(self.rect.x-10, self.rect.y-10, self.width+20, self.height+20)
@@ -511,7 +510,7 @@ def reproduction_Herbivores():
 def reproduction_Predators():
     for i in range(0,len(objPr)):
         for j in range(0,len(objPr)):
-            collide = pygame.Rect.colliderect(objPr[i].zoneVisionC, objPr[j].zoneVisionC)
+            collide = pygame.Rect.colliderect(objPr[i].zoneVisionP, objPr[j].zoneVisionP)
             if objPr[j].get_nrj() >= 8 and objPr[i].get_nrj() >= 8:
                 if collide and objPr[j].get_gender() == "male" and objPr[i].get_gender() == "female" and objPr[j].isDead() == False and objPr[i].isDead() == False and objPr[i].get_pregnant() == False:
                     objPr[i].pregnant()
