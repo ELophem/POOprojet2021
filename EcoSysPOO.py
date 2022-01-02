@@ -578,7 +578,6 @@ initial_Predators = len(objPr)
 number_of_Plants_alive = 0
 initial_Plants = len(objP)
 
-
 #Initializing the mainloop for our pygame
 def mainloop():
     while True:
@@ -607,6 +606,5 @@ def mainloop():
         herb_group.draw(screen)
         plant_group.draw(screen)
         pygame.display.flip()
-
 
 mainloop()
