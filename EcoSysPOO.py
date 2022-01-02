@@ -32,7 +32,7 @@ class lifeforms(pygame.sprite.Sprite, ABC):
         pygame.sprite.Sprite.__init__(self)
         self.hp = 10 
         self.dead = False 
-        self.nrj = 100
+        self.energy = 100
         self.isOrgWas  = False 
         self.image = pygame.Surface([width, height]).convert_alpha()
         self.width = width
@@ -52,10 +52,10 @@ class lifeforms(pygame.sprite.Sprite, ABC):
     def get_posY(self):
         return self.rect.y
 
-    def set_xC(self, value):
+    def set_posX(self, value):
         self.rect.x = value
 
-    def set_yC(self, value):
+    def set_posY(self, value):
         self.rect.y = value
 
     def set_color(self, value):
@@ -65,7 +65,7 @@ class lifeforms(pygame.sprite.Sprite, ABC):
         self.image.fill(red)
         self.color = red
 
-    def set_foul(self):
+    def set_waste(self):
         self.image.fill(brown)
         self.color = brown
 
@@ -78,17 +78,18 @@ class lifeforms(pygame.sprite.Sprite, ABC):
 
     def set_hp(self, value): 
         i = value
-        self.hp += i
-
-    def set_nrj(self, value):
-        i = value
-        self.nrj += i
-    
-    def get_nrj(self):
-        return self.nrj
+        self.hp += i    
     
     def get_hp(self):
         return self.hp
+
+    def set_energy(self, value):
+        i = value
+        self.energy += i
+    
+    def get_energy(self):
+        return self.energy
+
 
     def get_width(self):
         return self.width
@@ -104,9 +105,8 @@ class lifeforms(pygame.sprite.Sprite, ABC):
 class Animals(lifeforms):
     def __init__(self, width, height, pos_x, pos_y):
         lifeforms.__init__(self, width, height, pos_x, pos_y)
-        self.my_gender = random.choice(gender)
-        self.isViande = False
-        self.isMiams = False
+        self.isGender = random.choice(gender)
+        self.isFood = False
         self.speed = random.randrange(1, 5)
         self.move = [None, None]
         self.direction = None
@@ -119,7 +119,7 @@ class Animals(lifeforms):
         return self.direction
 
     def get_gender(self):
-        return self.my_gender
+        return self.isGender
     
     def pregnant(self):
         self.preg = True
@@ -130,11 +130,11 @@ class Animals(lifeforms):
     def get_pregnant(self):
         return self.preg
 
-    def get_isMiams(self):
-        return self.isMiams
+    def get_isFood(self):
+        return self.isFood
 
-    def set_isMiams(self, value):
-        self.isMiams = value
+    def set_isFood(self, value):
+        self.isFood = value
 
 #here we are defining the classes of the two types of animals there are going to be predators and herbivores
 class Predator(Animals):
@@ -161,9 +161,9 @@ class Predator(Animals):
  #here is an update on the state of the animal and to add a random movement in any direction
     def update(self):
         if self.hp > 0:
-            self.nrj -= 0.05  
-            if self.nrj <= 0 :
-                self.nrj = 0
+            self.energy -= 0.05  
+            if self.energy <= 0 :
+                self.energy = 0
                 if self.hp > 0:
                     self.hp -= 0.5 
 
@@ -197,7 +197,7 @@ class Predator(Animals):
                 self.rect.y += self.move[1]
                 self.zoneVisionP.y += self.move[1] 
 
-        elif self.hp <= 0 and self.isMiams == False:
+        elif self.hp <= 0 and self.isFood == False:
             self.hp = 0
             self.image.fill(red)
             self.color = red 
@@ -226,9 +226,9 @@ class Herbivore(Animals):
  #here is an update on the state of the animal and to add a random movement in any direction
     def update(self):
         if self.hp > 0:   
-            self.nrj -= 0.05  
-            if self.nrj <= 0 :
-                self.nrj = 0
+            self.energy -= 0.05  
+            if self.energy <= 0 :
+                self.energy = 0
                 if self.hp > 0:
                     self.hp -= 0.5 
             directions = {"S":((-1,2),(1,self.speed)),"SW":((-self.speed,-1),(1,self.speed)),"W":((-self.speed,-1),(-1,2)),"NW":((-self.speed,-1),(-self.speed,-1)),"N":((-1,2),(-self.speed,-1)),"NE":((1,self.speed),(-self.speed,-1)),"E":((1,self.speed),(-1,2)),"SE":((1,self.speed),(1,self.speed))} #((min x, max x)(min y, max y))
@@ -260,7 +260,7 @@ class Herbivore(Animals):
                 self.zoneVisionH.x += self.move[0]
                 self.rect.y += self.move[1]
                 self.zoneVisionH.y += self.move[1]
-        elif self.hp <= 0 and self.isMiams == False:
+        elif self.hp <= 0 and self.isFood == False:
             self.hp = 0
             self.image.fill(red)
             self.color = red
@@ -275,13 +275,13 @@ class Plants(lifeforms):
 
         self.color = green
         self.image.fill(self.color)
-        self.zoneRacine = pygame.Rect(self.rect.x-50, self.rect.y-50, self.width+100, self.height+100)
+        self.zoneVisionPlant = pygame.Rect(self.rect.x-50, self.rect.y-50, self.width+100, self.height+100)
 
     def update(self):
-        if self.isDead() == False and self.nrj > 0 :
-            self.nrj -= 0.05  
-        elif self.nrj <= 0 :
-            self.nrj = 0
+        if self.isDead() == False and self.energy > 0 :
+            self.energy -= 0.05  
+        elif self.energy <= 0 :
+            self.energy = 0
             if self.hp > 0:
                 self.hp -= 0.05
         elif self.hp <= 0 :
@@ -325,16 +325,16 @@ def hunt():
                 if collide and objH[j].get_color != brown :
                     objH[j].set_hp(-5)
                     if objH[j].isDead() == True:
-                        if objPr[i].get_nrj() <= 5:
-                            objPr[i].set_nrj(5)
+                        if objPr[i].get_energy() <= 5:
+                            objPr[i].set_energy(5)
 
-                        elif objPr[i].get_nrj() == 6:
-                            objPr[i].set_nrj(4)
+                        elif objPr[i].get_energy() == 6:
+                            objPr[i].set_energy(4)
                             if objPr[i].get_hp() <= 9:
                                 objPr[i].set_hp(1)
 
-                        elif objPr[i].get_nrj() == 7:
-                            objPr[i].set_nrj(3)
+                        elif objPr[i].get_energy() == 7:
+                            objPr[i].set_energy(3)
                             if objPr[i].get_hp() <= 8:
                                 objPr[i].set_hp(2)
                             elif objPr[i].get_hp() == 9:
@@ -342,8 +342,8 @@ def hunt():
                             else:
                                 objPr[i].set_hp(0)
 
-                        elif objPr[i].get_nrj() == 8:
-                            objPr[i].set_nrj(2)
+                        elif objPr[i].get_energy() == 8:
+                            objPr[i].set_energy(2)
                             if objPr[i].get_hp() <= 7:
                                 objPr[i].set_hp(3)
                             elif objPr[i].get_hp() == 8:
@@ -353,8 +353,8 @@ def hunt():
                             else:
                                 objPr[i].set_hp(0)
 
-                        elif objPr[i].get_nrj() == 9:
-                            objPr[i].set_nrj(1)
+                        elif objPr[i].get_energy() == 9:
+                            objPr[i].set_energy(1)
                             if objPr[i].get_hp() <= 6:
                                 objPr[i].set_hp(4)
                             elif objPr[i].get_hp() == 7:
@@ -366,8 +366,8 @@ def hunt():
                             else:
                                 objPr[i].set_hp(0)
 
-                        elif objPr[i].get_nrj() == 10:
-                            objPr[i].set_nrj(0)
+                        elif objPr[i].get_energy() == 10:
+                            objPr[i].set_energy(0)
                             if objPr[i].get_hp() <= 5:
                                 objPr[i].set_hp(5)
                             elif objPr[i].get_hp() == 6:
@@ -391,18 +391,18 @@ def eatplant():
                     objP[j].set_hp(-10)
                     if objP[j].isDead() == True:
                         objP[j].set_X(WIDTH+50)
-                    if objH[i].get_nrj() <= 5:
-                        objH[i].set_nrj(5)
+                    if objH[i].get_energy() <= 5:
+                        objH[i].set_energy(5)
                         number_of_Plants_alive -= 1
 
-                    elif objH[i].get_nrj() == 6:
-                        objH[i].set_nrj(4)
+                    elif objH[i].get_energy() == 6:
+                        objH[i].set_energy(4)
                         if objH[i].get_hp() <= 9:
                             objH[i].set_hp(1)
                             number_of_Plants_alive -= 1
 
-                    elif objH[i].get_nrj() == 7:
-                        objH[i].set_nrj(3)
+                    elif objH[i].get_energy() == 7:
+                        objH[i].set_energy(3)
                         if objH[i].get_hp() <= 8:
                             objH[i].set_hp(2)
                         elif objH[i].get_hp() == 9:
@@ -411,8 +411,8 @@ def eatplant():
                              objH[i].set_hp(0)
                              number_of_Plants_alive -= 1
 
-                    elif objH[i].get_nrj() == 8:
-                        objH[i].set_nrj(2)
+                    elif objH[i].get_energy() == 8:
+                        objH[i].set_energy(2)
                         if objH[i].get_hp() <= 7:
                             objH[i].set_hp(3)
                         elif objH[i].get_hp() == 8:
@@ -423,8 +423,8 @@ def eatplant():
                              objH[i].set_hp(0)
                              number_of_Plants_alive -= 1
 
-                    elif objH[i].get_nrj() == 9:
-                        objH[i].set_nrj(1)
+                    elif objH[i].get_energy() == 9:
+                        objH[i].set_energy(1)
                         if objH[i].get_hp() <= 6:
                             objH[i].set_hp(4)
                         elif objH[i].get_hp() == 7:
@@ -437,8 +437,8 @@ def eatplant():
                              objH[i].set_hp(0)
                              number_of_Plants_alive -= 1
 
-                    elif objH[i].get_nrj() == 10:
-                        objH[i].set_nrj(0)
+                    elif objH[i].get_energy() == 10:
+                        objH[i].set_energy(0)
                         if objH[i].get_hp() <= 5:
                             objH[i].set_hp(5)
                         elif objH[i].get_hp() == 6:
@@ -458,7 +458,7 @@ def absorbHerb():
     for i in range(0,len(objH)):
         for j in range(0,len(objP)):
             if objH[i].get_color() == brown:
-                collide = pygame.Rect.colliderect(objH[i].rect, objP[j].zoneRacine)
+                collide = pygame.Rect.colliderect(objH[i].rect, objP[j].zoneVisionPlant)
                 if collide: 
                     objH[i].set_X(WIDTH+50)
                     number_of_Herbivores_alive -= 1
@@ -468,7 +468,7 @@ def absorbPred():
     for i in range(0,len(objPr)):
         for j in range(0,len(objP)):
             if objPr[i].get_color() == brown:
-                collide = pygame.Rect.colliderect(objPr[i].rect, objP[j].zoneRacine)
+                collide = pygame.Rect.colliderect(objPr[i].rect, objP[j].zoneVisionPlant)
                 if collide: 
                     objPr[i].set_X(WIDTH+50)
                     number_of_Predators_alive -= 1
@@ -500,7 +500,7 @@ def reproduction_Herbivores():
     for i in range(0,len(objH)):
         for j in range(0,len(objH)):
             collide = pygame.Rect.colliderect(objH[i].zoneVisionH, objH[j].zoneVisionH)
-            if objH[j].get_nrj() >= 8 and objH[i].get_nrj() >= 8:
+            if objH[j].get_energy() >= 8 and objH[i].get_energy() >= 8:
                 if collide and objH[j].get_gender() == "male" and objH[i].get_gender() == "female" and objH[j].isDead() == False and objH[i].isDead() == False and objH[i].get_pregnant() == False:
                     objH[i].pregnant()
                 if random.randrange(0,20) == 2 and objH[i].get_pregnant() == True and number_of_Herbivores_alive < 20:
@@ -511,7 +511,7 @@ def reproduction_Predators():
     for i in range(0,len(objPr)):
         for j in range(0,len(objPr)):
             collide = pygame.Rect.colliderect(objPr[i].zoneVisionP, objPr[j].zoneVisionP)
-            if objPr[j].get_nrj() >= 8 and objPr[i].get_nrj() >= 8:
+            if objPr[j].get_energy() >= 8 and objPr[i].get_energy() >= 8:
                 if collide and objPr[j].get_gender() == "male" and objPr[i].get_gender() == "female" and objPr[j].isDead() == False and objPr[i].isDead() == False and objPr[i].get_pregnant() == False:
                     objPr[i].pregnant()
                 if random.randrange(0,20) == 2 and objPr[i].get_pregnant() == True and number_of_Predators_alive < 20:
@@ -521,7 +521,7 @@ def reproduction_Predators():
 def reproduction_Plants():
     if random.randrange(0,20) == 2:
         for i in range(0,len(objP)):
-            if objP[i].get_nrj() >= 5 and objP[i].get_hp() != 0 and random.randrange(0,20) == 2:
+            if objP[i].get_energy() >= 5 and objP[i].get_hp() != 0 and random.randrange(0,20) == 2:
                     create_plant()
             else:
                 return None
@@ -547,23 +547,23 @@ def malesPred():
                 male = pygame.Rect(objPr[i].get_xC()-10, objPr[i].get_yC()-10, objPr[i].get_width()+20, objPr[i].get_height()+20)
                 pygame.draw.rect(screen, (0, 255, 255), male) 
 
-def zoneRacine():
+def zoneVisionPlant():
     for i in number_of_Plants: 
-        pygame.draw.rect(screen, (255, 255, 0), objP[i].zoneRacine )
+        pygame.draw.rect(screen, (255, 255, 0), objP[i].zoneVisionPlant )
 
 
 def become_orgw():
     for j in range(0,len(objH)):
         for i in range(0,len(objPr)):
             if objH[j].get_color() == red and random.randrange(0,100) == 2:
-                objH[j].set_isMiams(True)
-                objH[j].set_foul()
+                objH[j].set_isFood(True)
+                objH[j].set_waste()
 
 def become_orgw2():
     for i in range(0,len(objPr)):
         if objPr[i].get_color() == red and random.randrange(0,100) == 2:
-            objPr[i].set_isMiams(True)
-            objPr[i].set_foul()
+            objPr[i].set_isFood(True)
+            objPr[i].set_waste()
 
 def become_orgw3():
     for i in range(0,len(objP)):
