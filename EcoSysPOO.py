@@ -101,7 +101,7 @@ class lifeforms(pygame.sprite.Sprite, ABC):
         self.rect.x = value
 
 
-#Initializing the classes of the two main lifeforms animals and plants
+#Initializing the base class for the two main animalforms there are going to be predator and prey
 class Animals(lifeforms):
     def __init__(self, width, height, pos_x, pos_y):
         lifeforms.__init__(self, width, height, pos_x, pos_y)
@@ -211,7 +211,6 @@ class Herbivore(Animals):
         self.image.fill(self.color)
         self.zoneVisionH = pygame.Rect(self.rect.x-10, self.rect.y-10, self.width+20, self.height+20)
         
-    #-------------------------------Getters/setters---------------------    
     def set_x(self, value):
         self.zoneVisionH.x = value
 
