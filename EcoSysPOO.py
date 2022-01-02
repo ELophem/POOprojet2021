@@ -551,7 +551,6 @@ def zoneVisionPlant():
     for i in number_of_Plants: 
         pygame.draw.rect(screen, (255, 255, 0), objP[i].zoneVisionPlant )
 
-
 def become_orgw():
     for j in range(0,len(objH)):
         for i in range(0,len(objPr)):
