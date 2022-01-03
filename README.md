@@ -24,7 +24,10 @@ Plants:
 
 Notre dernière classe qui déscend de lifeforms est la classe plante qui reprends les éléments de base d'une lifeform c'est à dire le niveau d'énergie et le niveau de points de vie, mais qui contrairement au animaux ne se déplacera pas dans notre écosystème. 
 
+Fonctionnement:
 
+Dans notre onglet pygame qui sera ouvert une fois la simulation lancé nous verrons 3 types d'objets qui ont été crée: en Blanc nos prédateurs en Vert Foncé nos herbivores et en vert nos plantes. Nous verrons alors que nos deux types d'animaux se promennent de manière aléatoire dans notre simulation et qu'ils meurent une fois que leurs HP est à zéro.
+Nos plantes ne se déplacent pas et se nourissent de la matière organique laissé par des cadavres des animaux décédé.
 
 ## Diagramme de classes
 ![Ceci est le diagramme de classes correspondant](https://raw.githubusercontent.com/ELophem/POOprojet2021/main/Diagramme%20de%20classe%20ECOSYSTEM.png?token=AOPPNMEHYZAYJLFI43ESTDDB2LLPS)
