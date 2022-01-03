@@ -34,7 +34,7 @@ Nos plantes ne se déplacent pas et se nourissent de la matière organique laiss
 
 
 ##Principes SOLID
-###Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
+#Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
 Par exemple:
 Le S (Single responsibility principle) nous indique qu'une classe ou une méthode doit avoir une seule résponsabilité. Si nous prennons l"exemple de notre classe Herbivore nous voyons que cette classe a comme unique objectif de créer notre type d'animal (herbivore). Et rien d'autre les attributs plus généraux de cet objet sont pris à la classe animal et lifeforms. (hp,energy,speed ...)
 
