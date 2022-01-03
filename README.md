@@ -8,23 +8,23 @@ L'objectif du projet est de créer une simulation d'un Ecosystème contenant des
 ## Les classes
 Pour pouvoir créer cette simulation devons utiliser des classes pour créer nos différents éléments:
 
-Lifeforms:
+### Lifeforms:
 
 Nous commencons donc par créer la classe principale qui est appelé "lifeforms" de celle-ci déscendent toute les autres classes. Elle indique tout les paramètres qu'une forme de vie contient. C'est-à-dire points de vies, niveau d'énergie, la taille de celle-ci dans notre simulateur ainsi que son état actuel: la position X et Y dans notre monde virtuel.
 
-Animals:
+### Animals:
 
 Cette classe sert à initialiser les différents paramètres de nos animaux comme le sexe, la vitesse à laquelle il peut se déplacer ainsi que de voir si il est enceinte ou pas. De cette classe nous pouvons alors déscendre vers nos deux types d'animaux les prédateurs et les proies qui se déplaceront dans notre ecosystème.
 
-Predator and Herbivore:
+### Predator and Herbivore:
 
 Ces deux classes-ci représentent nos deux sortes d'animaux dans notre écosystème les deux éléments sont surtout important car ils contiennent une fonction appelée update() qui va indiquer un déplacement random au prédateurs ou proies en fonction de si oui ou non ils sont encore en vie.
 
-Plants:
+### Plants:
 
 Notre dernière classe qui déscend de lifeforms est la classe plante qui reprends les éléments de base d'une lifeform c'est à dire le niveau d'énergie et le niveau de points de vie, mais qui contrairement au animaux ne se déplacera pas dans notre écosystème. 
 
-Fonctionnement:
+### Fonctionnement:
 
 Dans notre onglet pygame qui sera ouvert une fois la simulation lancé nous verrons 3 types d'objets qui ont été crée: en Blanc nos prédateurs en Vert Foncé nos herbivores et en vert nos plantes. Nous verrons alors que nos deux types d'animaux se promennent de manière aléatoire dans notre simulation et qu'ils meurent une fois que leurs HP est à zéro.
 Nos plantes ne se déplacent pas et se nourissent de la matière organique laissé par des cadavres des animaux décédé.
@@ -42,7 +42,7 @@ Nos plantes ne se déplacent pas et se nourissent de la matière organique laiss
 
 Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
 
-Par exemple:
+#### Par exemple:
 
 Le S (Single responsibility principle) nous indique qu'une classe ou une méthode doit avoir une seule résponsabilité. Si nous prennons l"exemple de notre classe Herbivore nous voyons que cette classe a comme unique objectif de créer notre type d'animal (herbivore). Et rien d'autre les attributs plus généraux de cet objet sont pris à la classe animal et lifeforms. (hp,energy,speed ...)
 
