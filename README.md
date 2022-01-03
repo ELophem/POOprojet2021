@@ -31,3 +31,15 @@ Nos plantes ne se déplacent pas et se nourissent de la matière organique laiss
 
 ## Diagramme de classes
 ![Ceci est le diagramme de classes correspondant](https://raw.githubusercontent.com/ELophem/POOprojet2021/main/Diagramme%20de%20classe%20ECOSYSTEM.png?token=AOPPNMEHYZAYJLFI43ESTDDB2LLPS)
+
+
+##Principes SOLID
+###Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
+Par exemple:
+Le S (Single responsibility principle) nous indique qu'une classe ou une méthode doit avoir une seule résponsabilité. Si nous prennons l"exemple de notre classe Herbivore nous voyons que cette classe a comme unique objectif de créer notre type d'animal (herbivore). Et rien d'autre les attributs plus généraux de cet objet sont pris à la classe animal et lifeforms. (hp,energy,speed ...)
+
+Le O (Open/Closed principle) indique que notre programme doit être fermée à la modification directe mais ouvert à l'extension. C'est à dire que nous pouvons devoir ajouter un objet sans devoir réecrire tout le code. Ceci est le cas car si nous voulions rajouter un type d'animal nous créerons simplement une nouvelle classe qui déscendra de la classe Animal. En faisant par exemple: class Fish(Animals):
+
+
+
+
