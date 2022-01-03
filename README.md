@@ -3,7 +3,7 @@
 
 par Edouard d.S.d.L. 18072
 ## Introduction
-#### L'objectif du projet est de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
+L'objectif du projet est de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
 
 ## Les classes
 Pour pouvoir créer cette simulation devons utiliser des classes pour créer nos différents éléments:
@@ -34,6 +34,7 @@ Nos plantes ne se déplacent pas et se nourissent de la matière organique laiss
 
 
 ##Principes SOLID
+
 #Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
 Par exemple:
 Le S (Single responsibility principle) nous indique qu'une classe ou une méthode doit avoir une seule résponsabilité. Si nous prennons l"exemple de notre classe Herbivore nous voyons que cette classe a comme unique objectif de créer notre type d'animal (herbivore). Et rien d'autre les attributs plus généraux de cet objet sont pris à la classe animal et lifeforms. (hp,energy,speed ...)
