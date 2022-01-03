@@ -38,7 +38,7 @@ Nos plantes ne se déplacent pas et se nourissent de la matière organique laiss
 
 
 
-##Principes SOLID
+## Principes SOLID
 
 Pour pouvoir programmer notre simulation de manière compréhensible nous avons utilisé la méthode SOLID.
 
