@@ -6,7 +6,7 @@ par Edouard d.S.d.L. 18072
 #### L'objectif du projet était de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
 
 ## Les classes
-### Pour pouvoir créer cette simulation devons utiliser des classes pour créer nos différents éléments:
+Pour pouvoir créer cette simulation devons utiliser des classes pour créer nos différents éléments:
 
 ###Lifeforms
 Nous commencons donc par créer la classe principale qui est appelé "lifeforms" de celle-ci déscendent toute les autres classes. Elle indique tout les paramètres qu'une forme de vie contient. C'est-à-dire points de vies, niveau d'énergie, la taille de celle-ci dans notre simulateur ainsi que son état actuel: la position X et Y dans notre monde virtuel.
