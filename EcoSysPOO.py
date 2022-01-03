@@ -146,7 +146,7 @@ class Predator(Animals):
         self.color = white
         self.image.fill(self.color)
         self.zoneVisionP = pygame.Rect(self.rect.x-10, self.rect.y-10, width+20, height+20)
-    #-----------------------------Getters/setters
+
     def set_x(self, value):
         self.zoneVisionP.x = value
 
@@ -314,7 +314,7 @@ for i in number_of_Plants:
     plant_group.add(objP[i])
 
 
-
+#here we define the method where the predators hunt the herbivores 
 def hunt():
     global number_of_Herbivores_alive
     for i in range(0,len(objPr)):
@@ -380,6 +380,7 @@ def hunt():
                             else:
                                 objPr[i].set_hp(0)
 
+#here we define the method where the herbivores hunt the plant that are alive
 def eatplant():
     global number_of_Plants_alive
     for i in range(0,len(objH)):
@@ -452,6 +453,8 @@ def eatplant():
                              objH[i].set_hp(0)
                              number_of_Plants_alive -= 1
 
+
+#here we define the methods where the dead herbivores and predators are absorbed by the plants 
 def absorbHerb():
     global number_of_Herbivores_alive
     for i in range(0,len(objH)):
@@ -473,7 +476,7 @@ def absorbPred():
                     number_of_Predators_alive -= 1
 
 
-
+#here we create the objects aka our 3 lifeforms
 def create_herb():
     global number_of_Herbivores_alive
     objH.append(Herbivore(20, 20, random.randrange(10, WIDTH-10), random.randrange(10, HEIGHT-10)))
@@ -524,27 +527,6 @@ def reproduction_Plants():
                     create_plant()
             else:
                 return None
-
-
-def malesHerb():
-    for i in number_of_Herbivores:
-        for j in number_of_Herbivores:
-            if objH[j].get_gender() == "male":
-                male = pygame.Rect(objH[j].get_xC()-10, objH[j].get_yC()-10, objH[j].get_width()+20, objH[j].get_height()+20)
-                pygame.draw.rect(screen, (0, 255, 0), male)
-            if objH[i].get_gender() == "male":               
-                male = pygame.Rect(objH[i].get_xC()-10, objH[i].get_yC()-10, objH[i].get_width()+20, objH[i].get_height()+20)
-                pygame.draw.rect(screen, (0, 255, 255), male)
-
-def malesPred():
-    for i in number_of_Predators:
-        for j in number_of_Predators:
-            if objPr[j].get_gender() == "male":
-                male = pygame.Rect(objPr[j].get_xC()-10, objPr[j].get_yC()-10, objPr[j].get_width()+20, objPr[j].get_height()+20)
-                pygame.draw.rect(screen, (0, 255, 0), male)
-            if objPr[i].get_gender() == "male":               
-                male = pygame.Rect(objPr[i].get_xC()-10, objPr[i].get_yC()-10, objPr[i].get_width()+20, objPr[i].get_height()+20)
-                pygame.draw.rect(screen, (0, 255, 255), male) 
 
 def zoneVisionPlant():
     for i in number_of_Plants: 
