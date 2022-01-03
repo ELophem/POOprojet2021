@@ -1,7 +1,7 @@
 # PO3L_Ecosystem
 
 
-####### par Edouard d.S.d.L. 18072
+par Edouard d.S.d.L. 18072
 ## Introduction
 #### L'objectif du projet était de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
 
