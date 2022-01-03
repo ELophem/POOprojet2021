@@ -27,3 +27,4 @@ Notre dernière classe qui déscend de lifeforms est la classe plante qui repren
 
 
 ## Diagramme de classes
+![alt text] (https://github.com/ELophem/POOprojet2021/blob/main/Diagramme%20de%20classe%20ECOSYSTEM.png)
