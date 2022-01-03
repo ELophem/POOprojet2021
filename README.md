@@ -3,7 +3,7 @@
 
 par Edouard d.S.d.L. 18072
 ## Introduction
-#### L'objectif du projet était de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
+#### L'objectif du projet est de créer une simulation d'un Ecosystème contenant des Animaux (des prédateurs et des proies) et des plantes, lesquelles se nourissent des matières organiques des animaux décédés. Pour effectuer ce projet j'ai choisi d'utiliser le language python et d'utiliser pygame pour créer une simulation dans lesquelles nos objets se promeneront de manière aléatoire.
 
 ## Les classes
 Pour pouvoir créer cette simulation devons utiliser des classes pour créer nos différents éléments:
